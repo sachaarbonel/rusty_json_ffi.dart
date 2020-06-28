@@ -1,0 +1,20 @@
+[package]
+name = "rust_dart_ffi_protobuf"
+version = "0.1.0"
+authors = ["Sacha <sacha.arbonel@hotmail.fr>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "rust_dart_ffi_protobuf"
+crate-type = ["cdylib"] #dynamic library
+
+[dependencies]
+prost = "0.6.1"
+ffi-support = "0.4.0"
+serde = {version ="1.0.114",features = ["derive"]}
+serde_json = "1.0.55"
+# anyhow = "1.0.31"
+
+[build-dependencies]
+prost-build = { version = "0.6.1" }

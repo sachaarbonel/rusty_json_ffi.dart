@@ -1,0 +1,11 @@
+language = "C"
+
+[parse.expand]
+crates = ["rust_dart_ffi_protobuf"]
+
+[parse]
+parse_deps = true
+include = ["ffi-support"]
+
+[enum]
+prefix_with_name = true
