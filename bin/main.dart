@@ -2,24 +2,24 @@
 import 'dart:ffi';
 import 'dart:io';
 import 'package:ffi/ffi.dart';
-import 'package:rust_dart_ffi_protobuf/addressbook.dart';
+import 'package:rust_dart_ffi_protobuf/addressbook.pb.dart';
 
-// class ByteBuffer extends Struct {
-//   @Int64()
-//   int len;
-//   Pointer<Uint8> data;
+class ByteBuffer extends Struct {
+  @Int64()
+  int len;
+  Pointer<Uint8> data;
 
-//   factory ByteBuffer.allocate(int len, Pointer<Uint8> data) =>
-//       allocate<ByteBuffer>().ref
-//         ..len = len
-//         ..data = data;
-// }
+  factory ByteBuffer.allocate(int len, Pointer<Uint8> data) =>
+      allocate<ByteBuffer>().ref
+        ..len = len
+        ..data = data;
+}
 
-// typedef get_address_book_func = Pointer<ByteBuffer> Function(Void);
+typedef get_address_book_func = Pointer<ByteBuffer> Function();
 
-// typedef GetAddressBook = Pointer<ByteBuffer> Function(void);
+typedef GetAddressBook = Pointer<ByteBuffer> Function();
 
-typedef get_address_book_func = Pointer<Utf8> Function();
+// typedef get_address_book_func = Pointer<Utf8> Function();
 
 main() {
   DynamicLibrary dylib;
@@ -34,6 +34,8 @@ main() {
       get_address_book_pointer.asFunction<get_address_book_func>();
 
   final messagePointer = get_address_book();
-  final message = Utf8.fromUtf8(messagePointer);
-  print(addressBookFromJson(message).people[0].id);
+  ByteBuffer buffer = messagePointer.ref;
+  AddressBook.fromBuffer(buffer.data.asTypedList(buffer.len));
+  // final message = Utf8.fromUtf8(messagePointer);
+  // print(addressBookFromJson(message).people[0].id);
 }
