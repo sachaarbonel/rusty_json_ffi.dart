@@ -35,7 +35,54 @@ main() {
 
   final messagePointer = get_address_book();
   ByteBuffer buffer = messagePointer.ref;
-  AddressBook.fromBuffer(buffer.data.asTypedList(buffer.len));
+  final book = AddressBook.fromBuffer([
+    10,
+    44,
+    10,
+    5,
+    83,
+    97,
+    99,
+    104,
+    97,
+    16,
+    1,
+    26,
+    24,
+    115,
+    97,
+    99,
+    104,
+    97,
+    46,
+    97,
+    114,
+    98,
+    111,
+    110,
+    101,
+    108,
+    64,
+    104,
+    111,
+    116,
+    109,
+    97,
+    105,
+    108,
+    46,
+    102,
+    114,
+    34,
+    7,
+    10,
+    3,
+    104,
+    101,
+    121,
+    16,
+    1,
+  ]);
   // final message = Utf8.fromUtf8(messagePointer);
-  // print(addressBookFromJson(message).people[0].id);
+  print(book.people[0].id);
 }

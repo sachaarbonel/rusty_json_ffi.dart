@@ -34,6 +34,7 @@ pub extern "C" fn get_address_book() -> ByteBuffer {
     address_book_msg
         .encode(&mut address_book_msg_buffer)
         .unwrap();
+    println!("{:#?}", address_book_msg_buffer);
     ByteBuffer::from_vec(address_book_msg_buffer)
 
     // rust_string_to_c(serde_json::to_string(&address_book_msg).unwrap())
